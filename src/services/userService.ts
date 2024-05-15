@@ -29,20 +29,19 @@ export class userService {
         
 
         if(!user) {
-            throw new AppError( 404, "user not registered")
+            throw new AppError( 404, "User not registered")
         }
 
         const compare = await bcrypt.compare(body.password, user.password);
+        
 
-        if(!compare) {
-            throw new AppError(401, "email and password doesn't match")
+        if (!compare) {
+           throw new AppError(401, "Email and password doesn't match");
         }
 
         const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET as string)
 
         return {acessToken: token, user: userReturnSchema.parse(user)}
-
-
     }
 
     public getUser = async (id: number): Promise<TUserReturn> => {

@@ -7,6 +7,7 @@ import { container } from "tsyringe";
 import { OpportunityService } from "../services/opportunityService";
 import { validateToken } from "../middlewares/validateToken.middleware";
 import { isOpportunityOwner } from "../middlewares/isOpportunityOwner.middleware";
+import { ValidId } from "../middlewares/ValidId.middleware";
 
 export const OpportunityRouter = Router()
 
@@ -18,7 +19,7 @@ OpportunityRouter.post("/", validateToken.execute, ValidBody.execute(TOpportunit
 OpportunityRouter.get("/", (req, res) => opportunityController.findMany(req, res))
 OpportunityRouter.get("/user", validateToken.execute, (req, res) => opportunityController.findMany(req, res))
 
-OpportunityRouter.get("/:id", validateToken.execute, isOpportunityOwner.execute, (req, res) => opportunityController.findOne(req, res))
+OpportunityRouter.get("/:id", ValidId.execute, validateToken.execute, isOpportunityOwner.execute, (req, res) => opportunityController.findOne(req, res))
 OpportunityRouter.patch("/:id", validateToken.execute, isOpportunityOwner.execute, ValidBody.execute(OpportunitySchema), opportunityController.update)
 OpportunityRouter.delete("/:id",  validateToken.execute, isOpportunityOwner.execute, (req, res) => opportunityController.delete(req, res))
 

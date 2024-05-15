@@ -3,12 +3,12 @@ import { prisma } from "../database/prisma";
 import { AppError } from "../errors/AppError";
 
 export class ValidId {
-    static execute(req: Request, res: Response, next: NextFunction){
+    static async execute(req: Request, res: Response, next: NextFunction){
         const id = req.params.id
 
-        const opportunity = prisma.opportunity.findFirst({
+        const opportunity = await prisma.opportunity.findFirst({
             where: { id: Number(id)}
-        })
+        })        
 
         if(!opportunity){
             throw new AppError(404, "opportunity not found")

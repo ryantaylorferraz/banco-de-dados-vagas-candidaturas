@@ -1,4 +1,4 @@
-// import "express-async-errors"
+import "express-async-errors"
 import "reflect-metadata"
 import express, { json } from "express"
 import helmet from "helmet"

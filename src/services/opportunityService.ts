@@ -28,12 +28,16 @@ export class OpportunityService {
         })
         return data as TOpportunity;
     }
+
+    
     async update(id: number, body: TOpportunityUpdate): Promise<TOpportunity>{
         const data = await prisma.opportunity.update({
             where: {id}, data: body
         })
         return data;
     }
+
+
     async delete(id: number): Promise<void>{
         await prisma.opportunity.delete({
             where: {id}
