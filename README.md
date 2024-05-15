@@ -64,7 +64,7 @@ Padrão de resposta (STATUS 200)
 {
     "message": "User not registered"
 }
-
+```
 
 ### Retornar usuário GET /users
 
