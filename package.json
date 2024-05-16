@@ -3,9 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "18"
+  },
   "scripts": {
+    "build": "npx tsc",
     "dev": "tsnd  --cls --respawn src/server.ts",
     "migrate:dev": "dotenv -e .env.develop -- npx prisma migrate dev",
+
     "studio:dev": "dotenv -e .env.develop -- npx prisma studio"
   },
   "keywords": [],
@@ -14,6 +19,7 @@
   "dependencies": {
     "@prisma/client": "^5.12.1",
     "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-async-errors": "^3.1.1",
@@ -25,6 +31,7 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
+    "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
     "@types/jsonwebtoken": "^9.0.6",
     "prisma": "^5.12.1",

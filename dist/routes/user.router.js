@@ -1,0 +1,18 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.userRouter = void 0;
+const express_1 = require("express");
+const tsyringe_1 = require("tsyringe");
+const userService_1 = require("../services/userService");
+const userController_1 = require("../controllers/userController");
+const validateToken_middleware_1 = require("../middlewares/validateToken.middleware");
+const ValideBody_middleware_1 = require("../middlewares/ValideBody.middleware");
+const user_schema_1 = require("../schemas/user.schema");
+const isEmailUnique_middleware_1 = require("../middlewares/isEmailUnique.middleware");
+tsyringe_1.container.registerSingleton("UserService", userService_1.userService);
+const UserController = tsyringe_1.container.resolve(userController_1.userController);
+exports.userRouter = (0, express_1.Router)();
+exports.userRouter.post("/", isEmailUnique_middleware_1.isEmailUnique.execute, ValideBody_middleware_1.ValidBody.execute(user_schema_1.userRegisterSchema), (req, res) => UserController.register(req, res));
+exports.userRouter.post("/login", ValideBody_middleware_1.ValidBody.execute(user_schema_1.userLoginSchema), (req, res) => UserController.login(req, res));
+exports.userRouter.get("/", validateToken_middleware_1.validateToken.execute, (req, res) => UserController.getUser(req, res));
+exports.userRouter.get("/todos", (req, res) => UserController.getAll(req, res));

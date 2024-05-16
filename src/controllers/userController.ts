@@ -21,9 +21,7 @@ export class userController {
     }
     public getUser = async (req: Request, res: Response) => {
 
-        const id = res.locals.decode.user;
-        console.log(res.locals.decode);
-        
+        const id = res.locals.decode.user;        
 
         const response = await this.userService.getUser(id)
 

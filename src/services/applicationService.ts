@@ -9,7 +9,6 @@ export class ApplicationService {
         return data;
     }
     async findMany(opportunityId: number): Promise<TApplicationSchema[]>{
-        console.log(opportunityId);
         const data = await prisma.application.findMany({ where: { opportunityId }});
         
         return data;

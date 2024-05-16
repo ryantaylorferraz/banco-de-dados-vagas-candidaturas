@@ -9,7 +9,6 @@ import jwt from "jsonwebtoken";
 export class userService {
 
     public register = async (body: TUserRegister): Promise<TUserReturn> => {
-        console.log(body);
         
         const hashPassword = await bcrypt.hash(body.password, 10)
 
@@ -25,8 +24,6 @@ export class userService {
 
     public login = async (body: TUserLogin): Promise<TLoginReturn> => {
         const user = await prisma.user.findFirst({where: { email: body.email }})
-        console.log(user);
-        
 
         if(!user) {
             throw new AppError( 404, "User not registered")
@@ -45,7 +42,6 @@ export class userService {
     }
 
     public getUser = async (id: number): Promise<TUserReturn> => {
-        console.log(id);
         const user = await prisma.user.findFirst({where: {id}})
         
 

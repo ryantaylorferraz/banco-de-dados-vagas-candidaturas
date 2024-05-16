@@ -6,9 +6,7 @@ export class validateToken {
   static execute(req: Request, res: Response, next: NextFunction) {
     const authorization = req.headers.authorization;
 
-    const token = authorization?.replace("Bearer ", "")
-    console.log(token);
-    
+    const token = authorization?.replace("Bearer ", "")    
 
     if (!token) {
       throw new AppError(401, "Token in required");
